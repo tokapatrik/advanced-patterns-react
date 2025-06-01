@@ -4,6 +4,7 @@ import { Button } from "@/features/shared/components/ui/Button";
 import Card from "@/features/shared/components/ui/Card";
 
 import { CommentForList } from "../types";
+import { CommentDeleteDialog } from "./CommentDeleteDialog";
 import { CommentEditForm } from "./CommentEditForm";
 
 type CommentCardProps = {
@@ -21,7 +22,7 @@ const CommentCard = ({ comment }: CommentCardProps) => {
     <Card className="space-y-4">
       <CommentCardHeader comment={comment} />
       <CommentCardContent comment={comment} />
-      <CommentCardButtons setIsEditing={setIsEditing} />
+      <CommentCardButtons comment={comment} setIsEditing={setIsEditing} />
     </Card>
   );
 };
@@ -45,18 +46,22 @@ const CommentCardContent = ({ comment }: CommentCardContentProps) => {
   return <p>{comment.content}</p>;
 };
 
-type CommentCardButtonsProps = {
+type CommentCardButtonsProps = Pick<CommentCardProps, "comment"> & {
   setIsEditing: (value: boolean) => void;
 };
 
-function CommentCardButtons({ setIsEditing }: CommentCardButtonsProps) {
+const CommentCardButtons = ({
+  comment,
+  setIsEditing,
+}: CommentCardButtonsProps) => {
   return (
     <div className="flex gap-4">
       <Button variant="link" onClick={() => setIsEditing(true)}>
         Edit
       </Button>
+      <CommentDeleteDialog comment={comment} />
     </div>
   );
-}
+};
 
 export { CommentCard };

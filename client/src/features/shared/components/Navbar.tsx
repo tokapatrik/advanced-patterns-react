@@ -1,9 +1,28 @@
-import { ThemeToggle } from "./ThemeToggle";
+import { Home } from "lucide-react";
 
-export default function Navigation() {
+import { ThemeToggle } from "./ThemeToggle";
+import Link from "./ui/Link";
+
+function Navigation() {
+  const navLinkClassName =
+    "rounded-lg p-2 text-lg hover:bg-neutral-100 dark:hover:bg-neutral-800";
+
+  const activeNavLinkClassName = "bg-neutral-100 dark:bg-neutral-800";
+
   return (
     <nav className="flex w-64 flex-col gap-4 pt-8">
+      <Link
+        to="/"
+        variant={"ghost"}
+        className={navLinkClassName}
+        activeProps={{ className: activeNavLinkClassName }}
+      >
+        <Home className="h-6 w-6" />
+        Home
+      </Link>
       <ThemeToggle />
     </nav>
   );
 }
+
+export default Navigation;
