@@ -7,6 +7,7 @@ import {
   httpBatchLink,
 } from "@trpc/react-query";
 
+import { ErrorComponent } from "./features/shared/components/ErrorComponent";
 import Spinner from "./features/shared/components/ui/Spinner";
 import { env } from "./lib/utils/env";
 import { routeTree } from "./routeTree.gen";
@@ -41,6 +42,7 @@ const createRouter = () => {
         <Spinner />
       </div>
     ),
+    defaultErrorComponent: ErrorComponent,
     Wrap: ({ children }) => (
       <trpc.Provider client={trpcClinet} queryClient={queryClient}>
         <QueryClientProvider client={queryClient}>

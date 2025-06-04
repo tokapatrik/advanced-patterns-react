@@ -1,5 +1,6 @@
 import type { Experience } from "@advanced-react/server/features/experience/models";
 
+import { ErrorComponent } from "@/features/shared/components/ErrorComponent";
 import { trpc } from "@/router";
 
 import { CommentCreateForm } from "./CommentCreateForm";
@@ -24,7 +25,7 @@ const CommentsSection = ({
   );
 
   if (commentsQuery.isError) {
-    return <div>Something went wrong...</div>;
+    return <ErrorComponent />;
   }
 
   return (
