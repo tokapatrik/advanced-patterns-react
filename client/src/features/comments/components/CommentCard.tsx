@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { Button } from "@/features/shared/components/ui/Button";
 import Card from "@/features/shared/components/ui/Card";
+import Link from "@/features/shared/components/ui/Link";
 import { UserAvatar } from "@/features/users/components/UserAvatar";
 
 import { CommentForList } from "../types";
@@ -33,7 +34,9 @@ type CommentCardHeaderProps = Pick<CommentCardProps, "comment">;
 const CommentCardHeader = ({ comment }: CommentCardHeaderProps) => {
   return (
     <div className="flex items-center gap-2">
-      <UserAvatar user={comment.user} />
+      <Link to="/users/$userId" params={{ userId: comment.user.id }}>
+        <UserAvatar user={comment.user} />
+      </Link>
       <time className="text-sm text-neutral-500">
         · {new Date(comment.createdAt).toLocaleDateString()}
       </time>
