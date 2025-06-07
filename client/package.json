@@ -41,6 +41,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "5.0.0-alpha.91",
     "@tanstack/router-devtools": "^1.83.0",
     "@tanstack/router-plugin": "^1.83.0",
     "@types/leaflet": "^1.9.16",

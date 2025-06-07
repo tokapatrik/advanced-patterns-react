@@ -1,5 +1,6 @@
 import { AppRouter } from "@advanced-react/server";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRouter as createTanstackRouter } from "@tanstack/react-router";
 import {
   createTRPCQueryUtils,
@@ -50,6 +51,7 @@ const createRouter = () => {
       <trpc.Provider client={trpcClinet} queryClient={queryClient}>
         <QueryClientProvider client={queryClient}>
           {children}
+          <ReactQueryDevtools />
         </QueryClientProvider>
       </trpc.Provider>
     ),
