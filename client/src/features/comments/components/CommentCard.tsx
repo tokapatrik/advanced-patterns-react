@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { Button } from "@/features/shared/components/ui/Button";
 import Card from "@/features/shared/components/ui/Card";
+import { UserAvatar } from "@/features/users/components/UserAvatar";
 
 import { CommentForList } from "../types";
 import { CommentDeleteDialog } from "./CommentDeleteDialog";
@@ -32,7 +33,7 @@ type CommentCardHeaderProps = Pick<CommentCardProps, "comment">;
 const CommentCardHeader = ({ comment }: CommentCardHeaderProps) => {
   return (
     <div className="flex items-center gap-2">
-      <div>{comment.user.name}</div>
+      <UserAvatar user={comment.user} />
       <time className="text-sm text-neutral-500">
         · {new Date(comment.createdAt).toLocaleDateString()}
       </time>
