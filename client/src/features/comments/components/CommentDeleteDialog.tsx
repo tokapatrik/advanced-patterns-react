@@ -29,6 +29,9 @@ const CommentDeleteDialog = ({ comment }: CommentDeleteDialogProps) => {
         utils.comments.byExperienceId.invalidate({
           experienceId: comment.experienceId,
         }),
+        utils.experiences.byId.invalidate({
+          id: comment.experienceId,
+        }),
         utils.experiences.feed.invalidate(),
       ]);
 

@@ -39,6 +39,9 @@ const CommentCreateForm = ({ experienceId }: CommentCreateFormProps) => {
         utils.comments.byExperienceId.invalidate({
           experienceId,
         }),
+        utils.experiences.byId.invalidate({
+          id: experienceId,
+        }),
         utils.experiences.feed.invalidate({}),
       ]);
 
