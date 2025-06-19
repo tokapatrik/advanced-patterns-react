@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useCurrentUser } from "@/features/auth/hooks/useCurrentUser";
 import { Button } from "@/features/shared/components/ui/Button";
 import Card from "@/features/shared/components/ui/Card";
 import Link from "@/features/shared/components/ui/Link";
@@ -58,12 +59,25 @@ const CommentCardButtons = ({
   comment,
   setIsEditing,
 }: CommentCardButtonsProps) => {
+  const { currentUser } = useCurrentUser();
+
+  const isCommentOwner = currentUser?.id === comment.userId;
+  const isExperienceOwner = currentUser?.id === comment.experience.userId;
+
+  if (!isCommentOwner && !isExperienceOwner) {
+    return null;
+  }
+
   return (
     <div className="flex gap-4">
-      <Button variant="link" onClick={() => setIsEditing(true)}>
-        Edit
-      </Button>
-      <CommentDeleteDialog comment={comment} />
+      {isCommentOwner && (
+        <Button variant="link" onClick={() => setIsEditing(true)}>
+          Edit
+        </Button>
+      )}
+      {(isCommentOwner || isExperienceOwner) && (
+        <CommentDeleteDialog comment={comment} />
+      )}
     </div>
   );
 };
