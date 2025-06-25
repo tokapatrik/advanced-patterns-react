@@ -12,7 +12,7 @@ import {
 import { useToast } from "@/features/shared/hooks/useToast";
 import { trpc } from "@/router";
 
-import { CommentForList } from "../types";
+import { CommentForList, CommentOptimistic } from "../types";
 
 type CommentDeleteDialogProps = {
   comment: CommentForList;
@@ -53,7 +53,12 @@ const CommentDeleteDialog = ({ comment }: CommentDeleteDialogProps) => {
   return (
     <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
       <DialogTrigger asChild>
-        <Button variant="destructive-link">Delete</Button>
+        <Button
+          variant="destructive-link"
+          disabled={(comment as CommentOptimistic).optimistic}
+        >
+          Delete
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

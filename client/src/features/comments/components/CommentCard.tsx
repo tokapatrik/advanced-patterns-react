@@ -6,7 +6,7 @@ import Card from "@/features/shared/components/ui/Card";
 import Link from "@/features/shared/components/ui/Link";
 import { UserAvatar } from "@/features/users/components/UserAvatar";
 
-import { CommentForList } from "../types";
+import { CommentForList, CommentOptimistic } from "../types";
 import { CommentDeleteDialog } from "./CommentDeleteDialog";
 import { CommentEditForm } from "./CommentEditForm";
 
@@ -71,7 +71,11 @@ const CommentCardButtons = ({
   return (
     <div className="flex gap-4">
       {isCommentOwner && (
-        <Button variant="link" onClick={() => setIsEditing(true)}>
+        <Button
+          variant="link"
+          onClick={() => setIsEditing(true)}
+          disabled={(comment as CommentOptimistic).optimistic}
+        >
           Edit
         </Button>
       )}
