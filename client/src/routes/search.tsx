@@ -9,6 +9,9 @@ import { trpc } from "@/router";
 export const Route = createFileRoute("/search")({
   component: RouteComponent,
   validateSearch: experienceFiltersSchema,
+  loader: async ({ context: { trpcQueryUtils } }) => {
+    await trpcQueryUtils.tags.list.ensureData();
+  },
 });
 
 function RouteComponent() {
@@ -17,8 +20,10 @@ function RouteComponent() {
 
   const experiencesQuery = trpc.experiences.search.useInfiniteQuery(search, {
     getNextPageParam: (lastPage) => lastPage.nextCursor,
-    enabled: !!search.q,
+    enabled: !!search.q || !!search.tags,
   });
+
+  const [tags] = trpc.tags.list.useSuspenseQuery();
 
   return (
     <main className="space-y-4">
@@ -27,6 +32,7 @@ function RouteComponent() {
           navigate({ search: filter });
         }}
         initialFilters={search}
+        tags={tags}
       />
       <InfiniteScroll
         onLoadMore={!!search.q ? experiencesQuery.fetchNextPage : undefined}
